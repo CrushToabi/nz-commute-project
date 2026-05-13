@@ -21,3 +21,5 @@ tmp/
 *.log
 
 
+osm/*.pbf
+osm/gh/
