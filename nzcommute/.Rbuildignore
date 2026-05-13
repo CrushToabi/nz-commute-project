@@ -1,0 +1,6 @@
+^use-case$
+^.*\.Rproj$
+^\.Rproj\.user$
+^artifacts$
+^data$
+^osm$
