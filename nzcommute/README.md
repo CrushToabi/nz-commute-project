@@ -13,14 +13,28 @@ The package contains reusable tools for:
 - SA2 transition aggregation;
 - road-segment traffic aggregation.
 
-The scripts in `use-case/` demonstrate how these functions are applied to the 2023 NZ Journey-to-Work data.
+The scripts in `scripts/` demonstrate how these functions are applied to the 2023 NZ Journey-to-Work data.
 
 ## Install
 
 From the project root:
 
 ```r
-install.packages(c("devtools", "roxygen2"))
+install.packages(c(
+  "devtools",
+  "roxygen2",
+  "dplyr",
+  "sf",
+  "readr",
+  "ggplot2",
+  "leaflet",
+  "htmlwidgets",
+  "scales"
+))
+
+# Install ghroute separately if it is not already available.
+# See https://RForge.net/ghroute for the current installation instructions.
+
 devtools::document()
 devtools::install()
 ```
@@ -36,33 +50,33 @@ library(nzcommute)
 Run the sample-rule analysis once:
 
 ```r
-source("use-case/01_sample_2023.R")
+source("scripts/01_sample_2023.R")
 ```
 
 Then run the full workflow for one direction:
 
 ```r
 direction <- "H2W"
-source("use-case/02_route_2023_directional.R")
-source("use-case/03_string_2023_directional.R")
-source("use-case/04_aggr_2023_directional.R")
-source("use-case/05_traffic_segments_2023_directional.R")
+source("scripts/02_route_2023_directional.R")
+source("scripts/03_string_2023_directional.R")
+source("scripts/04_aggr_2023_directional.R")
+source("scripts/05_traffic_segments_2023_directional.R")
 ```
 
 Run again for the reverse direction:
 
 ```r
 direction <- "W2H"
-source("use-case/02_route_2023_directional.R")
-source("use-case/03_string_2023_directional.R")
-source("use-case/04_aggr_2023_directional.R")
-source("use-case/05_traffic_segments_2023_directional.R")
+source("scripts/02_route_2023_directional.R")
+source("scripts/03_string_2023_directional.R")
+source("scripts/04_aggr_2023_directional.R")
+source("scripts/05_traffic_segments_2023_directional.R")
 ```
 
 Or run both directions:
 
 ```r
-source("use-case/run_all_2023.R")
+source("scripts/run_all_2023.R")
 ```
 
 ## Key exported functions
@@ -86,4 +100,4 @@ aggregate_segment_traffic()
 
 ## Project design
 
-The package is the reusable toolkit. The `use-case/` scripts are intentionally thin and mainly do input/output orchestration. This follows the supervisor's advice: generalise the core routing and aggregation functions, and use the NZ 2023 commute analysis only as a demonstration of the tools.
+The package is the reusable toolkit. The `scripts/` files are intentionally thin and mainly do input/output orchestration. This follows the supervisor's advice: generalise the core routing and aggregation functions, and use the NZ 2023 commute analysis only as a demonstration of the tools.

@@ -341,6 +341,103 @@ nz-commute-project/
 
 ---
 
+# Setup and Reproduce
+
+## 1. Install R dependencies
+
+Use R 4.1.0 or newer. From the project root, install the package dependencies:
+
+```r
+install.packages(c(
+  "devtools",
+  "roxygen2",
+  "dplyr",
+  "sf",
+  "readr",
+  "ggplot2",
+  "leaflet",
+  "htmlwidgets",
+  "scales"
+))
+```
+
+The routing step also requires `ghroute`. Install it separately using the current instructions from:
+
+```text
+https://RForge.net/ghroute
+```
+
+Then build and install the local package:
+
+```r
+devtools::document("nzcommute")
+devtools::install("nzcommute")
+```
+
+## 2. Prepare external data files
+
+Most input data is included under `data/`, but the meshblock geometry CSV is optional in Git because it is large. Download the 2025 meshblock boundary table from Stats NZ:
+
+```text
+https://datafinder.stats.govt.nz/layer/120980-meshblock-2025/
+```
+
+Export or download it as CSV and place it at:
+
+```text
+data/meshblock-2025.csv
+```
+
+The file must contain the meshblock ID column `MB2025_V1_00` and a WKT geometry column named `WKT`.
+
+## 3. Prepare the OpenStreetMap routing file
+
+The GraphHopper routing step expects:
+
+```text
+osm/new-zealand-latest.osm.pbf
+```
+
+Download it with:
+
+```sh
+make -C osm
+```
+
+## 4. Run the workflow
+
+Run the sampling-rule analysis first:
+
+```r
+source("scripts/01_sample_2023.R")
+```
+
+Then run both directions:
+
+```r
+source("scripts/run_all_2023.R")
+```
+
+Or run one direction manually:
+
+```r
+direction <- "H2W"
+source("scripts/02_route_2023_directional.R")
+source("scripts/03_string_2023_directional.R")
+source("scripts/04_aggr_2023_directional.R")
+source("scripts/05_traffic_segments_2023_directional.R")
+```
+
+Generate the interactive map after both directions have produced traffic segment outputs:
+
+```r
+source("scripts/06_city_traffic_maps_2023.R")
+```
+
+Large generated route and traffic artifacts are not tracked in Git. They are written to `artifacts/` when the workflow is run.
+
+---
+
 # Data Sources
 
 ## 1. Journey-to-Work Census Data
@@ -369,6 +466,12 @@ Source:
 
 ```text
 https://datafinder.stats.govt.nz/layer/120980-meshblock-2025/
+```
+
+Expected local file:
+
+```text
+data/meshblock-2025.csv
 ```
 
 Used for:
@@ -440,4 +543,3 @@ Potential future extensions include:
 Yuxin Zhang  
 University of Auckland  
 Data Science 
-
