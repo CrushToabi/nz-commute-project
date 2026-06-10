@@ -343,6 +343,12 @@ Large raw data files and generated artifacts are not committed to this GitHub
 repository. Download the source datasets into `data/`, run `make -C osm` to
 obtain the OpenStreetMap PBF file, and regenerate outputs with the scripts.
 
+Create the data folders first:
+
+```bash
+mkdir -p data artifacts osm
+```
+
 ## 1. Journey-to-Work Census Data
 
 2023 Census commuting flows between Statistical Area 2 regions.
@@ -353,6 +359,12 @@ Source:
 https://datafinder.stats.govt.nz/table/121988-2023-census-main-means-of-travel-to-work-by-statistical-area-2/
 ```
 
+Expected local file:
+
+```text
+data/2023-census-main-means-of-travel-to-work-by-statistical-area.csv
+```
+
 Used for:
 
 - commuter OD flows
@@ -361,12 +373,56 @@ Used for:
 
 ---
 
-## 2. Meshblock Electoral-Population Data
+## 2. Statistical Area 2 Boundary Data
+
+2023 Statistical Area 2 boundaries, generalised.
+
+Source:
+
+```text
+https://datafinder.stats.govt.nz/layer/111227-statistical-area-2-2023-generalised/
+```
+
+Expected local shapefile components:
+
+```text
+data/statistical-area-2-2023-generalised.shp
+data/statistical-area-2-2023-generalised.shx
+data/statistical-area-2-2023-generalised.dbf
+data/statistical-area-2-2023-generalised.prj
+data/statistical-area-2-2023-generalised.cpg
+```
+
+Used for:
+
+- valid SA2 code filtering
+- assigning meshblocks to SA2s
+- route-to-SA2 string conversion
+
+---
+
+## 3. Meshblock Electoral-Population Data
 
 Source:
 
 ```text
 https://datafinder.stats.govt.nz/layer/121975-2023-census-electoral-population-at-meshblock-level-2025-meshblock/
+```
+
+Expected local shapefile components:
+
+```text
+data/2023-census-electoral-population-at-meshblock-level-2025-mes.shp
+data/2023-census-electoral-population-at-meshblock-level-2025-mes.shx
+data/2023-census-electoral-population-at-meshblock-level-2025-mes.dbf
+data/2023-census-electoral-population-at-meshblock-level-2025-mes.prj
+data/2023-census-electoral-population-at-meshblock-level-2025-mes.cpg
+```
+
+Optional downloaded companion file:
+
+```text
+data/2023-census-electoral-population-at-meshblock-level-2025-meshblock-data.csv
 ```
 
 Used for:
@@ -378,9 +434,27 @@ Used for:
 
 ---
 
-## 3. OpenStreetMap Road Network
+## 4. OpenStreetMap Road Network
 
 Road-network routing data downloaded from OpenStreetMap / Geofabrik.
+
+Source:
+
+```text
+https://download.geofabrik.de/australia-oceania/new-zealand-latest.osm.pbf
+```
+
+Expected local file:
+
+```text
+osm/new-zealand-latest.osm.pbf
+```
+
+Download command:
+
+```bash
+make -C osm
+```
 
 Used through:
 
