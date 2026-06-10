@@ -39,7 +39,6 @@ The result is a scalable framework for:
 - GraphHopper road-network routing
 - Road-segment traffic aggregation
 - Interactive Leaflet traffic maps
-- Mobility graph and stationary distribution analysis
 - Reusable `nzcommute` R package structure
 
 ---
@@ -156,9 +155,9 @@ Example:
 | commuter_count | representative routes |
 |---|---|
 | 20 | 1 |
-| 120 | 2 |
-| 350 | 4 |
-| 950 | 10 |
+| 120 | 3 |
+| 350 | 7 |
+| 950 | 15 |
 
 This creates richer spatial representation for large commuter flows while avoiding unnecessary computation for small flows.
 
@@ -284,15 +283,12 @@ This produces a network-wide commuter traffic intensity estimate.
 
 ---
 
-## Step 7 — Mobility Analysis and Visualisation
+## Step 7 — Spatial Summaries and Visualisation
 
 The weighted routing outputs support:
 
 - interactive traffic maps
-- mobility graph construction
-- stationary distribution analysis
 - SA2 transition matrices
-- SMT trajectory generation
 - morning vs evening commute comparison
 
 The final framework functions as a:
@@ -310,9 +306,9 @@ for large-scale commuter traffic estimation.
 ```text
 nz-commute-project/
 │
-├── artifacts/                 # Intermediate outputs (.rds / matrices / graphs)
+├── artifacts/                 # Generated outputs; ignored except metadata
 │
-├── data/                      # Raw census and spatial datasets
+├── data/                      # Raw census and spatial datasets; ignored
 │
 ├── nzcommute/                 # Reusable R package
 │   ├── R/
@@ -322,7 +318,7 @@ nz-commute-project/
 │   ├── NAMESPACE
 │   └── README.md
 │
-├── osm/                       # OpenStreetMap / GraphHopper data
+├── osm/                       # OSM download tools; .pbf files ignored
 │
 ├── scripts/                   # Main routing workflow scripts
 │   ├── 01_sample_2023.R
@@ -342,6 +338,10 @@ nz-commute-project/
 ---
 
 # Data Sources
+
+Large raw data files and generated artifacts are not committed to this GitHub
+repository. Download the source datasets into `data/`, run `make -C osm` to
+obtain the OpenStreetMap PBF file, and regenerate outputs with the scripts.
 
 ## 1. Journey-to-Work Census Data
 
@@ -395,9 +395,9 @@ Used through:
 - R
 - sf
 - dplyr
-- tidygraph
-- igraph
 - leaflet
+- htmlwidgets
+- scales
 - GraphHopper
 - ghroute
 - OpenStreetMap

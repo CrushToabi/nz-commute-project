@@ -68,22 +68,45 @@ source("scripts/run_all_2023.R")
 ## Key exported functions
 
 ```r
+# Paths and validation
 build_artifact_paths()
+check_direction()
+find_boundary_shapefile()
 find_meshblock_population_shapefile()
+find_sa2_shapefile()
+
+# OD preparation and sampling
+read_jtw_file()
 prepare_od_data()
 prepare_jtw_od_data()
+choose_n_samples()
 analyse_commuter_sample_rules()
+save_sample_rule()
 expand_od_samples()
 prepare_meshblock_population()
 assign_meshblocks_to_sa2()
 create_population_weighted_sampler()
+
+# Routing and route post-processing
 assign_route_weights()
 run_ghroute_for_transitions()
+make_route_signature()
 merge_duplicate_routes()
+renormalise_successful_routes()
+
+# Route strings and transition matrices
+compress_consecutive()
+fill_na_ids()
+resolve_polygon_hits()
 process_one_route_to_string()
+make_full_transition_matrix()
 aggregate_sa2_transitions()
+
+# Road-segment traffic
+make_directional_segments()
 split_routes_to_segments()
 aggregate_segment_traffic()
+traffic_segments_to_sf()
 ```
 
 ## Project design
