@@ -1,0 +1,28 @@
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# macOS
+.DS_Store
+
+# large generated artifacts
+artifacts/*.rds
+artifacts/*.csv
+artifacts/*.txt
+artifacts/*-parts/
+# optional
+data/meshblock-2025.csv
+data/
+
+# GraphHopper cache
+osm/gh/
+osm/*.pbf
+
+# local project libraries
+.r-lib/
+
+# temporary files
+tmp/
+*.log
+

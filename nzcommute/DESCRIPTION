@@ -1,0 +1,19 @@
+Package: nzcommute
+Title: Reusable Tools for Directional Population-Weighted Commute Routing
+Version: 0.2.0
+Authors@R: person("Yuxin", "Zhang", email = "yuxin@example.com", role = c("aut", "cre"))
+Description: Provides reusable functions for adaptive OD sampling, population-weighted meshblock point sampling, direction-specific routing, route-to-SA2 string conversion, transition aggregation, and road-segment traffic aggregation for commute-routing workflows.
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+Imports:
+    dplyr,
+    sf,
+    parallel,
+    stats,
+    utils
+Suggests:
+    ghroute,
+    ggplot2
+Config/roxygen2/version: 8.0.0
