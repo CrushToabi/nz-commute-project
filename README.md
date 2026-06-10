@@ -391,7 +391,7 @@ Source:
 https://datafinder.stats.govt.nz/layer/121975-2023-census-electoral-population-at-meshblock-level-2025-meshblock/
 ```
 
-Expected local shapefile components:
+Expected local files:
 
 ```text
 data/2023-census-electoral-population-at-meshblock-level-2025-mes.shp
@@ -399,11 +399,6 @@ data/2023-census-electoral-population-at-meshblock-level-2025-mes.shx
 data/2023-census-electoral-population-at-meshblock-level-2025-mes.dbf
 data/2023-census-electoral-population-at-meshblock-level-2025-mes.prj
 data/2023-census-electoral-population-at-meshblock-level-2025-mes.cpg
-```
-
-Optional downloaded companion file:
-
-```text
 data/2023-census-electoral-population-at-meshblock-level-2025-meshblock-data.csv
 ```
 
