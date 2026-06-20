@@ -68,6 +68,52 @@ allowing realistic large-scale commuter traffic estimation across New Zealand.
 
 ---
 
+# Data Setup
+
+The analysis scripts expect the Stats NZ input files to be placed in `data/`
+with specific filenames. The source data can be copied from the companion
+Stats NZ data repository:
+
+```text
+https://github.com/STATS-UOA/statsnz-data
+```
+
+Clone that repository outside this project, then run the helper script from the
+root of this repository:
+
+```bash
+git clone https://github.com/STATS-UOA/statsnz-data ../statsnz-data
+bash scripts/setup_statsnz_data.sh ../statsnz-data
+```
+
+The script copies the required files into the locations used by
+`scripts/01_sample_2023.R` and `scripts/02_route_2023_directional.R`:
+
+```text
+data/2023-census-main-means-of-travel-to-work-by-statistical-area.csv
+data/2023-census-electoral-population-at-meshblock-level-2025-meshblock-data.csv
+data/meshblock-2025.csv
+data/statistical-area-2-2023-generalised.shp
+data/statistical-area-2-2023-generalised.dbf
+data/statistical-area-2-2023-generalised.shx
+data/statistical-area-2-2023-generalised.prj
+```
+
+The meshblock geometry file is renamed to `data/meshblock-2025.csv` because
+the routing script reads that exact path. The file must contain a `WKT` column
+and the `MB2025_V1_00` meshblock identifier.
+
+OpenStreetMap data are prepared separately:
+
+```bash
+make -C osm
+```
+
+This downloads `osm/new-zealand-latest.osm.pbf`, which is used by GraphHopper
+through the `ghroute` package.
+
+---
+
 # Methodology
 
 ---
